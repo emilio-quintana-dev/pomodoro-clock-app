@@ -1,145 +1,92 @@
-import React from "react";
+import React, { useState } from "react";
 import BreakInterval from "./BreakInterval";
 import SessionLength from "./SessionLenght";
 import Timer from "./Timer";
 import Wrapper from "./Wrapper";
 import AppWrapper from "./AppWrapper";
 import OutterWrapper from "./OutterWrapper";
-import styled from "styled-components";
+import OptionsContainer from "./OptionsContainer";
+import Title from "./Title";
 import "../App.css";
 
-const Title = styled.h2`
-  font-size: 4rem;
-  font-weight: 600;
-  color: #fff;
-  text-align: center;
-`;
+export default function App() {
+  const [breakLength, setBreakLength] = useState(5);
+  const [sessionLength, setSessionLength] = useState(25);
+  const [timerMinute, setTimerMinute] = useState(25);
+  const [isPlay, setIsPlay] = useState(false);
+  const [count, setCount] = useState(0);
 
-const Grid = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-
-  @media (min-width: 600px) {
-    flex-wrap: nowrap;
-  }
-`;
-
-class App extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      breakLength: 5,
-      sessionLength: 25,
-      timerMinute: 25,
-      isPlay: false,
-    };
-  }
-
-  onIncreaseBreakLength = () => {
-    this.setState((prevState) => {
-      return {
-        breakLength: prevState.breakLength + 1,
-      };
-    });
+  const onIncreaseBreakLength = () => {
+    setBreakLength(breakLength + 1);
   };
 
-  onDecreaseBreakLength = () => {
-    this.setState((prevState) => {
-      return {
-        breakLength: prevState.breakLength - 1,
-      };
-    });
+  const onDecreaseBreakLength = () => {
+    setBreakLength(breakLength - 1);
   };
 
-  onDecreaseSessionLength = () => {
-    this.setState((prevState) => {
-      return {
-        sessionLength: prevState.sessionLength - 1,
-        timerMinute: prevState.sessionLength - 1,
-      };
-    });
+  const onDecreaseSessionLength = () => {
+    setSessionLength(sessionLength - 1);
+    setTimerMinute(sessionLength);
   };
 
-  onIncreaseSessionLength = () => {
-    this.setState((prevState) => {
-      return {
-        sessionLength: prevState.sessionLength + 1,
-        timerMinute: prevState.sessionLength + 1,
-      };
-    });
+  const onIncreaseSessionLength = () => {
+    setSessionLength(sessionLength + 1);
+    setTimerMinute(sessionLength);
   };
 
-  onUpdateTimerMinute = () => {
-    this.setState((prevState) => {
-      return {
-        timerMinute: prevState.timerMinute - 1,
-      };
-    });
+  const onUpdateTimerMinute = () => {
+    setTimerMinute(timerMinute - 1);
   };
 
-  onToggleInterval = (isSession) => {
+  const onToggleInterval = (isSession) => {
     if (isSession) {
-      this.setState({
-        timerMinute: this.state.sessionLength,
-      });
+      setTimerMinute(sessionLength);
     } else {
-      this.setState({
-        timerMinute: this.state.breakLength,
-      });
+      setTimerMinute(breakLength);
     }
   };
 
-  onResetTimer = () => {
-    this.setState({
-      timerMinute: this.state.sessionLength,
-    });
+  const onResetTimer = () => {
+    setTimerMinute(sessionLength);
   };
 
-  onPlayStopTimer = (isPlay) => {
-    this.setState({
-      isPlay: isPlay,
-    });
+  const onPlayStopTimer = (isPlay) => {
+    setIsPlay(isPlay);
   };
 
-  render() {
-    return (
-      <Wrapper>
-        <AppWrapper>
-          <Title>Pomo Clock</Title>
+  return (
+    <Wrapper>
+      <AppWrapper>
+        <Title>Pomo Clock</Title>
+        <Timer
+          timerMinute={timerMinute}
+          breakLength={breakLength}
+          updateTimerMinute={onUpdateTimerMinute}
+          toggleInterval={onToggleInterval}
+          resetTimer={onResetTimer}
+          onPlayStopTimer={onPlayStopTimer}
+        />
 
-          <Timer
-            timerMinute={this.state.timerMinute}
-            breakLength={this.state.breakLength}
-            updateTimerMinute={this.onUpdateTimerMinute}
-            toggleInterval={this.onToggleInterval}
-            resetTimer={this.onResetTimer}
-            onPlayStopTimer={this.onPlayStopTimer}
-          />
+        <OptionsContainer>
+          <OutterWrapper>
+            <BreakInterval
+              isPlay={isPlay}
+              breakInterval={breakLength}
+              increaseBreak={onIncreaseBreakLength}
+              decreaseBreak={onDecreaseBreakLength}
+            />
+          </OutterWrapper>
 
-          {/* <Grid>
-  <OutterWrapper>
-    <BreakInterval
-      isPlay={this.state.isPlay}
-      breakInterval={this.state.breakLength}
-      increaseBreak={this.onIncreaseBreakLength}
-      decreaseBreak={this.onDecreaseBreakLength}
-    />
-  </OutterWrapper>
-
-  <OutterWrapper>
-    <SessionLength
-      isPlay={this.state.isPlay}
-      sessionLength={this.state.sessionLength}
-      increaseSession={this.onIncreaseSessionLength}
-      decreaseSession={this.onDecreaseSessionLength}
-    />
-  </OutterWrapper>
-</Grid> */}
-        </AppWrapper>
-      </Wrapper>
-    );
-  }
+          <OutterWrapper>
+            <SessionLength
+              isPlay={isPlay}
+              sessionLength={sessionLength}
+              increaseSession={onIncreaseSessionLength}
+              decreaseSession={onDecreaseSessionLength}
+            />
+          </OutterWrapper>
+        </OptionsContainer>
+      </AppWrapper>
+    </Wrapper>
+  );
 }
-
-export default App;

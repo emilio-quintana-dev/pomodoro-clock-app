@@ -16,7 +16,13 @@ class Timer extends Component {
     };
   }
 
+  playAudio() {
+    const audioEl = document.getElementsByClassName("audio-element")[0];
+    audioEl.play();
+  }
+
   playTimer = () => {
+    this.playAudio();
     let intervalId = setInterval(this.decreaseTimer, 1000);
     this.props.onPlayStopTimer(true);
     this.setState({
@@ -77,6 +83,9 @@ class Timer extends Component {
   render() {
     return (
       <TimerWrapper>
+        <audio className="audio-element">
+          <source src="https://assets.coderrocketfuel.com/pomodoro-times-up.mp3"></source>
+        </audio>
         <TimerActions>
           <Button onClick={this.stopTimer}>Stop</Button>
           <Button onClick={this.resetTimer}>Refresh</Button>
@@ -85,9 +94,9 @@ class Timer extends Component {
         <h2>{this.state.isSession === true ? "Session" : "Break"}</h2>
 
         <TimerClock>
-          <span className="timer"> {this.props.timerMinute}</span>
-          <span className="timer">:</span>
-          <span className="timer">
+          <span> {this.props.timerMinute}</span>
+          <span>:</span>
+          <span>
             {this.state.timerSecond === 0
               ? "00"
               : this.state.timerSecond < 10

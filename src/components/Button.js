@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const Button = styled.section`
-  display: flex;
   background: #379683;
   border-radius: 3px;
   color: #fff;

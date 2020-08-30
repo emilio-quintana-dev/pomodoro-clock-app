@@ -20,22 +20,20 @@ const SessionLength = (props) => {
   };
   return (
     <InnerWrapper>
-      <h2>Session Length</h2>
-      <section className="interval-container">
-        <Button
-          disabled={props.isPlay === true ? "disabled" : ""}
-          onClick={decreaseCounter}
-        >
-          Down
-        </Button>
-        <p className="interval-length"> {props.sessionLength}</p>
-        <Button
-          disabled={props.isPlay === true ? "disabled" : ""}
-          onClick={increaseCounter}
-        >
-          Up
-        </Button>
-      </section>
+      <h2>Session Length:</h2>
+      <Button
+        disabled={props.isPlay === true ? "disabled" : ""}
+        onClick={decreaseCounter}
+      >
+        Down
+      </Button>
+      <p className="interval-length"> {props.sessionLength}</p>
+      <Button
+        disabled={props.isPlay === true ? "disabled" : ""}
+        onClick={increaseCounter}
+      >
+        Up
+      </Button>
     </InnerWrapper>
   );
 };
