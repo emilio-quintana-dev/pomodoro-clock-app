@@ -1,4 +1,6 @@
 import React from "react";
+import Button from "./Button";
+import InnerWrapper from "./InnerWrapper";
 
 const BreakInterval = (props) => {
   const decreaseCounter = () => {
@@ -17,14 +19,24 @@ const BreakInterval = (props) => {
     props.increaseBreak();
   };
   return (
-    <section>
-      <h4>Break Length</h4>
-      <section className="interval-container">
-        <button onClick={decreaseCounter}>Down</button>
+    <InnerWrapper>
+      <h2>Break Length</h2>
+      <section>
+        <Button
+          disabled={props.isPlay === true ? "disabled" : ""}
+          onClick={decreaseCounter}
+        >
+          Down
+        </Button>
         <p className="interval-length"> {props.breakInterval}</p>
-        <button onClick={increaseCounter}>Up</button>
+        <Button
+          disabled={props.isPlay === true ? "disabled" : ""}
+          onClick={increaseCounter}
+        >
+          Up
+        </Button>
       </section>
-    </section>
+    </InnerWrapper>
   );
 };
 
