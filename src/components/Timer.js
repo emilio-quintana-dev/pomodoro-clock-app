@@ -1,9 +1,15 @@
 import React, { Component } from "react";
 import Button from "./Button";
-import PlayButton from "./PlayButton";
+import BigButton from "./BigButton";
 import TimerWrapper from "./TimerWrapper";
-import TimerActions from "./TimerActions";
 import TimerClock from "./TimerClock";
+import pushSound from "../sounds/button-push.mp3";
+import styled from "styled-components";
+
+const ButtonWrapper = styled.div`
+  width: 50%;
+  margin: 0 auto;
+`;
 
 class Timer extends Component {
   constructor() {
@@ -13,6 +19,7 @@ class Timer extends Component {
       isSession: true,
       timerSecond: 0,
       intervalId: 0,
+      isPlaying: false,
     };
   }
 
@@ -27,6 +34,7 @@ class Timer extends Component {
     this.props.onPlayStopTimer(true);
     this.setState({
       intervalId: intervalId,
+      isPlaying: true,
     });
   };
 
@@ -68,6 +76,9 @@ class Timer extends Component {
   stopTimer = () => {
     clearInterval(this.state.intervalId);
     this.props.onPlayStopTimer(false);
+    this.setState({
+      isPlaying: false,
+    });
   };
 
   resetTimer = () => {
@@ -84,12 +95,12 @@ class Timer extends Component {
     return (
       <TimerWrapper>
         <audio className="audio-element">
-          <source src="https://assets.coderrocketfuel.com/pomodoro-times-up.mp3"></source>
+          <source src={pushSound}></source>
         </audio>
-        <TimerActions>
-          <Button onClick={this.stopTimer}>Stop</Button>
+
+        <ButtonWrapper>
           <Button onClick={this.resetTimer}>Refresh</Button>
-        </TimerActions>
+        </ButtonWrapper>
 
         <h2>{this.state.isSession === true ? "Session" : "Break"}</h2>
 
@@ -104,7 +115,11 @@ class Timer extends Component {
               : this.state.timerSecond}
           </span>
         </TimerClock>
-        <PlayButton onClick={this.playTimer}>Start</PlayButton>
+        {!this.state.isPlaying ? (
+          <BigButton onClick={this.playTimer}>Start</BigButton>
+        ) : (
+          <BigButton onClick={this.stopTimer}>Stop</BigButton>
+        )}
       </TimerWrapper>
     );
   }

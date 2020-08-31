@@ -1,40 +1,23 @@
 import React from "react";
-import Button from "./Button";
 import InnerWrapper from "./InnerWrapper";
+import Input from "./Input";
 
 const BreakInterval = (props) => {
-  const decreaseCounter = () => {
-    if (props.breakInterval === 1) {
-      return;
-    }
-
-    props.decreaseBreak();
+  const handleChange = (event) => {
+    props.updateSessionLength(event.target.value);
   };
 
-  const increaseCounter = () => {
-    if (props.breakInterval === 60) {
-      return;
-    }
-
-    props.increaseBreak();
-  };
   return (
     <InnerWrapper>
       <h2>Break Length:</h2>
-
-      <Button
-        disabled={props.isPlay === true ? "disabled" : ""}
-        onClick={decreaseCounter}
-      >
-        Down
-      </Button>
-      <p className="interval-length"> {props.breakInterval}</p>
-      <Button
-        disabled={props.isPlay === true ? "disabled" : ""}
-        onClick={increaseCounter}
-      >
-        Up
-      </Button>
+      <form>
+        <Input onChange={handleChange}>
+          <option value="5">5:00</option>
+          <option value="10">10:00</option>
+          <option value="15">15:00</option>
+          <option value="20">20:00</option>
+        </Input>
+      </form>
     </InnerWrapper>
   );
 };

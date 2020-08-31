@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Button = styled.section`
+const BigButton = styled.section`
   background: #fff;
   border-radius: 3px;
   color: #379683;
@@ -14,4 +14,4 @@ const Button = styled.section`
   box-shadow: rgb(235, 235, 235) 0px 6px 0px;
 `;
 
-export default Button;
+export default BigButton;

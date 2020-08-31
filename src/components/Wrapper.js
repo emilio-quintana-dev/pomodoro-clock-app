@@ -5,7 +5,7 @@ const Wrapper = styled.div`
   padding: 2em 4em;
   border: none;
   font-family: "Montserrat", sans-serif;
-  height: 200vh;
+  height: 300vh;
 `;
 
 export default Wrapper;

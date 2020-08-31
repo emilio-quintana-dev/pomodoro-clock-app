@@ -5,9 +5,26 @@ import Timer from "./Timer";
 import Wrapper from "./Wrapper";
 import AppWrapper from "./AppWrapper";
 import OutterWrapper from "./OutterWrapper";
-import OptionsContainer from "./OptionsContainer";
 import Title from "./Title";
 import "../App.css";
+import styled from "styled-components";
+
+const AboutWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 700px;
+  background: #fff;
+  margin: 0 auto;
+  margin-top: 100px;
+  padding: 40px;
+  box-shadow: 5px 10px;
+  font-size: 15px;
+  line-height: 30px;
+
+  @media (min-width: 700px) {
+    font-size: 18px;
+  }
+`;
 
 export default function App() {
   const [breakLength, setBreakLength] = useState(5);
@@ -16,22 +33,13 @@ export default function App() {
   const [isPlay, setIsPlay] = useState(false);
   const [count, setCount] = useState(0);
 
-  const onIncreaseBreakLength = () => {
-    setBreakLength(breakLength + 1);
+  const updateSessionLength = (newTime) => {
+    setSessionLength(newTime);
+    setTimerMinute(newTime);
   };
 
-  const onDecreaseBreakLength = () => {
-    setBreakLength(breakLength - 1);
-  };
-
-  const onDecreaseSessionLength = () => {
-    setSessionLength(sessionLength - 1);
-    setTimerMinute(sessionLength);
-  };
-
-  const onIncreaseSessionLength = () => {
-    setSessionLength(sessionLength + 1);
-    setTimerMinute(sessionLength);
+  const updateBreakLength = (newTime) => {
+    setBreakLength(newTime);
   };
 
   const onUpdateTimerMinute = () => {
@@ -67,26 +75,30 @@ export default function App() {
           onPlayStopTimer={onPlayStopTimer}
         />
 
-        <OptionsContainer>
-          <OutterWrapper>
-            <BreakInterval
-              isPlay={isPlay}
-              breakInterval={breakLength}
-              increaseBreak={onIncreaseBreakLength}
-              decreaseBreak={onDecreaseBreakLength}
-            />
-          </OutterWrapper>
+        <OutterWrapper>
+          <SessionLength
+            updateSessionLength={updateSessionLength}
+            isPlay={isPlay}
+            sessionLength={sessionLength}
+          />
 
-          <OutterWrapper>
-            <SessionLength
-              isPlay={isPlay}
-              sessionLength={sessionLength}
-              increaseSession={onIncreaseSessionLength}
-              decreaseSession={onDecreaseSessionLength}
-            />
-          </OutterWrapper>
-        </OptionsContainer>
+          <BreakInterval
+            isPlay={isPlay}
+            breakInterval={breakLength}
+            updateBreakLength={updateBreakLength}
+          />
+        </OutterWrapper>
       </AppWrapper>
+
+      <AboutWrapper>
+        <h1>About:</h1>
+        <p>
+          The Pomodoro Technique is a time management method developed by
+          Francesco Cirillo in the late 1980s. The technique uses a timer to
+          break down work into intervals, traditionally 25 minutes in length,
+          separated by short breaks. Wikipedia
+        </p>
+      </AboutWrapper>
     </Wrapper>
   );
 }
