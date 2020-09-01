@@ -1,3 +1,11 @@
+* {
+  font-family: "Montserrat";
+}
+
+button:hover {
+  background: #0d2d4f;
+}
+
 h2 {
   color: #fff;
 }
