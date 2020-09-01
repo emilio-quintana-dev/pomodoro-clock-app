@@ -1,6 +1,6 @@
 import React from "react";
-import InnerWrapper from "./InnerWrapper";
-import Input from "./Input";
+import InnerWrapper from "../prebuilt/InnerWrapper";
+import Input from "../prebuilt/Input";
 
 const SessionLength = (props) => {
   const handleChange = (event) => {

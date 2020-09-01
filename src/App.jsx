@@ -1,30 +1,13 @@
 import React, { useState } from "react";
-import BreakInterval from "./BreakInterval";
-import SessionLength from "./SessionLenght";
-import Timer from "./Timer";
-import Wrapper from "./Wrapper";
-import AppWrapper from "./AppWrapper";
-import OutterWrapper from "./OutterWrapper";
-import Title from "./Title";
-import "../App.css";
-import styled from "styled-components";
-
-const AboutWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 700px;
-  background: #fff;
-  margin: 0 auto;
-  margin-top: 100px;
-  padding: 40px;
-  box-shadow: 5px 10px;
-  font-size: 15px;
-  line-height: 30px;
-
-  @media (min-width: 700px) {
-    font-size: 18px;
-  }
-`;
+import BreakInterval from "./components/BreakInterval.jsx";
+import SessionLength from "./components/SessionLenght.jsx";
+import Timer from "./components/Timer.jsx";
+import Wrapper from "./prebuilt/Wrapper";
+import AppWrapper from "./prebuilt/AppWrapper";
+import OutterWrapper from "./prebuilt/OutterWrapper";
+import AboutWrapper from "./prebuilt/AboutWrapper";
+import Title from "./prebuilt/Title";
+import "./styles/App.css";
 
 export default function App() {
   const [breakLength, setBreakLength] = useState(5);

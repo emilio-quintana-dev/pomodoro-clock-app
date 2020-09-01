@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Button from "./Button";
-import BigButton from "./BigButton";
-import TimerWrapper from "./TimerWrapper";
-import TimerClock from "./TimerClock";
+import Button from "../prebuilt/Button";
+import BigButton from "../prebuilt/BigButton";
+import TimerWrapper from "../prebuilt/TimerWrapper";
+import TimerClock from "../prebuilt/TimerClock";
 import pushSound from "../sounds/button-push.mp3";
 import styled from "styled-components";
 
