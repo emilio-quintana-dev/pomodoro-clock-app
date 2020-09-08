@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Input = styled.select`
+const Selection = styled.select`
   width: 75%;
   padding: 12px 10px;
   display: inline-block;
@@ -11,4 +11,4 @@ const Input = styled.select`
   font-size: 20px;
 `;
 
-export default Input;
+export default Selection;

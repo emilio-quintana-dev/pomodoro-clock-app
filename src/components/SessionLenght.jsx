@@ -1,23 +1,20 @@
 import React from "react";
 import InnerWrapper from "../prebuilt/InnerWrapper";
-import Input from "../prebuilt/Input";
+import Selection from "../prebuilt/Selection";
 
 const SessionLength = (props) => {
-  const handleChange = (event) => {
-    props.updateSessionLength(event.target.value);
-  };
   return (
     <InnerWrapper>
       <h2>Session Length:</h2>
-
       <form>
-        <Input onChange={handleChange}>
+        <Selection
+          onChange={(event) => props.updateSessionLength(event.target.value)}
+        >
           <option value="15">15:00</option>
           <option value="20">20:00</option>
           <option value="25">25:00</option>
           <option value="30">30:00</option>
-          <option value="1">Test</option>
-        </Input>
+        </Selection>
       </form>
     </InnerWrapper>
   );

@@ -7,6 +7,8 @@ import AppWrapper from "./prebuilt/AppWrapper";
 import OutterWrapper from "./prebuilt/OutterWrapper";
 import AboutWrapper from "./prebuilt/AboutWrapper";
 import Title from "./prebuilt/Title";
+import Link from "./prebuilt/Link";
+import ContactForm from "./components/ContactForm.jsx";
 import "./styles/App.css";
 
 export default function App() {
@@ -79,8 +81,16 @@ export default function App() {
           The Pomodoro Technique is a time management method developed by
           Francesco Cirillo in the late 1980s. The technique uses a timer to
           break down work into intervals, traditionally 25 minutes in length,
-          separated by short breaks. Wikipedia
+          separated by short breaks.{" "}
+          <Link href="https://en.wikipedia.org/wiki/Pomodoro_Technique">
+            Wikipedia
+          </Link>
         </p>
+      </AboutWrapper>
+
+      <AboutWrapper>
+        <h1>Comments ?</h1>
+        <ContactForm />
       </AboutWrapper>
     </Wrapper>
   );

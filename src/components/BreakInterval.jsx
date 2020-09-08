@@ -1,22 +1,20 @@
 import React from "react";
 import InnerWrapper from "../prebuilt/InnerWrapper";
-import Input from "../prebuilt/Input";
+import Selection from "../prebuilt/Selection";
 
 const BreakInterval = (props) => {
-  const handleChange = (event) => {
-    props.updateSessionLength(event.target.value);
-  };
-
   return (
     <InnerWrapper>
       <h2>Break Length:</h2>
       <form>
-        <Input onChange={handleChange}>
+        <Selection
+          onChange={(event) => props.updateBreakLength(event.target.value)}
+        >
           <option value="5">5:00</option>
           <option value="10">10:00</option>
           <option value="15">15:00</option>
           <option value="20">20:00</option>
-        </Input>
+        </Selection>
       </form>
     </InnerWrapper>
   );
