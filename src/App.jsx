@@ -10,17 +10,29 @@ import Title from "./prebuilt/Title";
 import Link from "./prebuilt/Link";
 import ContactForm from "./components/ContactForm.jsx";
 import Footer from "./components/Footer";
-import "./styles/App.css";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./components/Globalstyle";
 import { lightTheme, darkTheme } from "./Themes";
+import styled from "styled-components";
+
+const ThemeButton = styled.button`
+  margin: 0 auto;
+  padding: 10px 20px;
+  max-width: 200px;
+  border: none;
+  font-size: 20px;
+
+  &:focus {
+    outline: none;
+  }
+`;
 
 export default function App() {
   const [breakLength, setBreakLength] = useState(5);
   const [sessionLength, setSessionLength] = useState(25);
   const [timerMinute, setTimerMinute] = useState(25);
   const [isPlay, setIsPlay] = useState(false);
-  const [count, setCount] = useState(0);
+
   const [theme, setTheme] = useState("light");
   const themeToggler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
@@ -61,7 +73,13 @@ export default function App() {
         <GlobalStyles />
         <Wrapper>
           <AppWrapper>
-            <button onClick={themeToggler}>Switch Theme</button>
+            <ThemeButton onClick={themeToggler}>
+              {theme === "light" ? "Dark Mode " : "Light Mode "}
+              <i
+                className={theme === "light" ? "far fa-moon" : "far fa-sun"}
+              ></i>
+            </ThemeButton>
+
             <Title>Pomo Clock</Title>
             <Timer
               timerMinute={timerMinute}

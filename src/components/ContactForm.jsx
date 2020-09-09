@@ -53,12 +53,7 @@ export default function ContactForm() {
           onChange={(event) => setMessage(event.target.value)}
         />
       </Form>
-      <Button
-        onClick={handleSubmit}
-        style={{ fontSize: 25, fontFamily: "Montserrat" }}
-      >
-        Submit
-      </Button>
+      <Button onClick={handleSubmit}>Submit</Button>
     </>
   );
 }
