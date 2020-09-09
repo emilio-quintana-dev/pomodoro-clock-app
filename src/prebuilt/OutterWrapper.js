@@ -4,7 +4,7 @@ const OutterWrapper = styled.div`
   display: flex;
   flex-direction: row;
   text-align: center;
-  background: #8ee4af;
+  background: ${({ theme }) => theme.timer};
   min-height: 200px;
 `;
 

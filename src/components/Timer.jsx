@@ -74,6 +74,7 @@ class Timer extends Component {
   };
 
   stopTimer = () => {
+    this.playAudio();
     clearInterval(this.state.intervalId);
     this.props.onPlayStopTimer(false);
     this.setState({

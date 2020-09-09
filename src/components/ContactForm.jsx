@@ -6,17 +6,20 @@ import axios from "axios";
 const Form = styled.form`
   width: 100%;
   height: 200px;
-  margin-bottom: 0.5em;
-  border: solid 1px;
-  padding: 5px;
+  margin-bottom: 1em;
+  padding: 10px;
   box-sizing: border-box;
+  background: ${({ theme }) => theme.form};
 `;
 
 const Input = styled.input`
-  width: 75%;
+  background: ${({ theme }) => theme.form};
+  width: 100%;
   border: none;
   color: grey;
+
   font-family: "Montserrat";
+  font-size: 20px;
   &:focus {
     outline: none;
   }
@@ -45,13 +48,17 @@ export default function ContactForm() {
         <Input
           type="text"
           name="message"
-          placeholder="Enter your comments here"
           value={message}
           autoFocus={false}
           onChange={(event) => setMessage(event.target.value)}
         />
       </Form>
-      <Button onClick={handleSubmit}>Submit</Button>
+      <Button
+        onClick={handleSubmit}
+        style={{ fontSize: 25, fontFamily: "Montserrat" }}
+      >
+        Submit
+      </Button>
     </>
   );
 }

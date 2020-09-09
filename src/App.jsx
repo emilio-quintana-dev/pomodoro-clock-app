@@ -9,7 +9,11 @@ import AboutWrapper from "./prebuilt/AboutWrapper";
 import Title from "./prebuilt/Title";
 import Link from "./prebuilt/Link";
 import ContactForm from "./components/ContactForm.jsx";
+import Footer from "./components/Footer";
 import "./styles/App.css";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles } from "./components/Globalstyle";
+import { lightTheme, darkTheme } from "./Themes";
 
 export default function App() {
   const [breakLength, setBreakLength] = useState(5);
@@ -17,6 +21,10 @@ export default function App() {
   const [timerMinute, setTimerMinute] = useState(25);
   const [isPlay, setIsPlay] = useState(false);
   const [count, setCount] = useState(0);
+  const [theme, setTheme] = useState("light");
+  const themeToggler = () => {
+    theme === "light" ? setTheme("dark") : setTheme("light");
+  };
 
   const updateSessionLength = (newTime) => {
     setSessionLength(newTime);
@@ -48,50 +56,58 @@ export default function App() {
   };
 
   return (
-    <Wrapper>
-      <AppWrapper>
-        <Title>Pomo Clock</Title>
-        <Timer
-          timerMinute={timerMinute}
-          breakLength={breakLength}
-          updateTimerMinute={onUpdateTimerMinute}
-          toggleInterval={onToggleInterval}
-          resetTimer={onResetTimer}
-          onPlayStopTimer={onPlayStopTimer}
-        />
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <>
+        <GlobalStyles />
+        <Wrapper>
+          <AppWrapper>
+            <button onClick={themeToggler}>Switch Theme</button>
+            <Title>Pomo Clock</Title>
+            <Timer
+              timerMinute={timerMinute}
+              breakLength={breakLength}
+              updateTimerMinute={onUpdateTimerMinute}
+              toggleInterval={onToggleInterval}
+              resetTimer={onResetTimer}
+              onPlayStopTimer={onPlayStopTimer}
+            />
 
-        <OutterWrapper>
-          <SessionLength
-            updateSessionLength={updateSessionLength}
-            isPlay={isPlay}
-            sessionLength={sessionLength}
-          />
+            <OutterWrapper>
+              <SessionLength
+                updateSessionLength={updateSessionLength}
+                isPlay={isPlay}
+                sessionLength={sessionLength}
+              />
 
-          <BreakInterval
-            isPlay={isPlay}
-            breakInterval={breakLength}
-            updateBreakLength={updateBreakLength}
-          />
-        </OutterWrapper>
-      </AppWrapper>
+              <BreakInterval
+                isPlay={isPlay}
+                breakInterval={breakLength}
+                updateBreakLength={updateBreakLength}
+              />
+            </OutterWrapper>
+          </AppWrapper>
 
-      <AboutWrapper>
-        <h1>About:</h1>
-        <p>
-          The Pomodoro Technique is a time management method developed by
-          Francesco Cirillo in the late 1980s. The technique uses a timer to
-          break down work into intervals, traditionally 25 minutes in length,
-          separated by short breaks.{" "}
-          <Link href="https://en.wikipedia.org/wiki/Pomodoro_Technique">
-            Wikipedia
-          </Link>
-        </p>
-      </AboutWrapper>
+          <AboutWrapper>
+            <h1>About:</h1>
+            <p>
+              The Pomodoro Technique is a time management method developed by
+              Francesco Cirillo in the late 1980s. The technique uses a timer to
+              break down work into intervals, traditionally 25 minutes in
+              length, separated by short breaks.{" "}
+              <Link href="https://en.wikipedia.org/wiki/Pomodoro_Technique">
+                Wikipedia
+              </Link>
+            </p>
+          </AboutWrapper>
 
-      <AboutWrapper>
-        <h1>Comments ?</h1>
-        <ContactForm />
-      </AboutWrapper>
-    </Wrapper>
+          <AboutWrapper>
+            <h1>Say Hello!</h1>
+
+            <ContactForm />
+          </AboutWrapper>
+          <Footer />
+        </Wrapper>
+      </>
+    </ThemeProvider>
   );
 }

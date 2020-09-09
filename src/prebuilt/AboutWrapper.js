@@ -4,11 +4,11 @@ const AboutWrapper = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 700px;
-  background: #fff;
+  background: ${({ theme }) => theme.box};
   margin: 0 auto;
   margin-top: 100px;
   padding: 40px;
-  box-shadow: 5px 10px;
+  box-shadow: ${({ theme }) => theme.shadow};
   font-size: 15px;
   line-height: 30px;
 

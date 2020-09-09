@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  background: #5cdb95;
-  padding: 2em 4em;
+  padding: 1em 1.5em;
   border: none;
   font-family: "Montserrat", sans-serif;
-  height: 300vh;
+  height: 310vh;
+
+  @media (min-width: 700px) {
+    height: 290vh;
+    padding: 2em 4em;
+  }
 `;
 
 export default Wrapper;
